@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WiFiy.MainPage"
+             BackgroundColor="#eeeeee">
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <CollectionView ItemsSource="{Binding Networks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#f22613"
+            StrokeThickness="2"
+            Background="White"
+            Padding="15"
+            Margin="0"
+            StrokeDashArray="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15" />
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10">
+                                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                    <Label Text="{Binding SSID}"
+                       TextColor="Black"
+                       FontSize="18"
+                       FontAttributes="Bold"/>
+
+                                    <HorizontalStackLayout Spacing="2">
+                                        <Label TextColor="Black"
+                           Text="BSSID:"
+                           FontSize="14" />
+                                        <Label TextColor="Black"
+                           Text="{Binding BSSID}"
+                           FontSize="14" />
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout Spacing="1">
+                                        <Label TextColor="Black"
+                           Text="PASSWORD:"
+                           FontSize="14"/>
+                                        <Label TextColor="Black"
+                           Text="{Binding PASSWORD}"
+                           FontSize="14" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                                
+                                <VerticalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Start">
+                                    <Button Text="Connect"
+                        BackgroundColor="#f22613"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="10,5"
+                        FontSize="18"
+                        Clicked="ConnectButton"
+                        x:Name="ConnectButton"/>
+
+                                    <Button Text="Copy"
+                                            BackgroundColor="#80db56"
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            Padding="10,5"
+                                            FontSize="18"
+                                            Clicked="CopyButton"
+                                            x:Name="SecondButton"/>
+                                </VerticalStackLayout>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+        
+
+    </ScrollView>
+
+</ContentPage>
