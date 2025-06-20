@@ -2,9 +2,8 @@ name: WiFiy (Windows + Android)
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -40,18 +39,19 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload Android artifacts
-      uses: actions/upload-artifact@v4
+      uses: softprops/action-gh-release@v2
       with:
-        name: android-build
-        path: |
+        files: |
           **/bin/Release/net8.0-android/**/*.apk
           **/bin/Release/net8.0-android/**/*.aab
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload Windows artifacts
-      uses: actions/upload-artifact@v4
+      uses: softprops/action-gh-release@v2
       with:
-        name: windows-build
-        path: |
+        files: |
           **/bin/Release/net8.0-windows10.0.19041.0/**/*.exe
           **/bin/Release/net8.0-windows10.0.19041.0/**/*.msix
-        
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
