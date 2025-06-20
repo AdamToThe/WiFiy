@@ -25,7 +25,7 @@
 		<ApplicationTitle>WiFiy</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.wifiy</ApplicationId>
+		<ApplicationId>com.adamthe.wifiy</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
