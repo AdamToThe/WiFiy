@@ -1,0 +1,48 @@
+name: [WiFiy] (Windows + Android)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install MAUI workloads
+      run: dotnet workload install maui
+
+    - name: Restore dependencies
+      run: dotnet restore WiFiy.sln
+
+    - name: Build Android (Release)
+      run: dotnet build WiFiy/WiFiy.csproj -c Release -f:net8.0-android
+
+    - name: Build Windows (Release)
+      run: dotnet build WiFiy/WiFiy.csproj -c Release -f:net8.0-windows10.0.19041.0
+
+    - name: Upload Android artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-build
+        path: |
+          **/bin/Release/net8.0-android/**/*.apk
+          **/bin/Release/net8.0-android/**/*.aab
+
+    - name: Upload Windows artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-build
+        path: |
+          **/bin/Release/net8.0-windows10.0.19041.0/**/*.exe
+          **/bin/Release/net8.0-windows10.0.19041.0/**/*.msix
